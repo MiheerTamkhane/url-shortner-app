@@ -1,11 +1,11 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.ts",
   "type": "module",
   "scripts": {
-    "start": "node dist/index.js",
-    "dev": "ts-node --watch src/index.ts",
+    "start": "node dist/index.ts",
+    "dev": "tsx watch src/index.ts",
     "build": "tsc",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
@@ -28,6 +28,7 @@
     "dotenv": "^17.2.3",
     "drizzle-orm": "^0.45.1",
     "express": "^5.2.1",
-    "pg": "^8.16.3"
+    "pg": "^8.16.3",
+    "zod": "^4.3.5"
   }
 }
