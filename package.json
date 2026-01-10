@@ -1,0 +1,12 @@
+{
+  "name": "url-shortner-app",
+  "version": "1.0.0",
+  "description": "A simple and fast web application that converts long, messy URLs into short, shareable links. It helps make links cleaner, easier to remember, and convenient to share across messages, emails, and social media, while reliably redirecting users to the original URL.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
