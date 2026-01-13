@@ -4,6 +4,8 @@ import { z } from "zod";
 import { createUserSchema, loginUserSchema} from "../validations";
 import { hashPassword } from "../utils/hash";
 import { getUserByEmail, createUser } from "../services/user.service";
+import jwt  from "jsonwebtoken";
+import { generateUserToken } from "../utils/token";
 
 const signupUser = async (req: Request, res: Response) => {
   try {
@@ -48,8 +50,17 @@ const loginUser = async (req: Request, res: Response) => {
       return res.status(400).json({ error: formatedError });
     }
   const { email, password } = validationResult.data;
-  
+  const user = await getUserByEmail(email);
+  if (!user) {
+    return res.status(404).json({ error: "User with email does not exist!" });
+  }
+  const { password: hashedPassword } = hashPassword(password, user.salt);
+  if (hashedPassword !== user.password) {
+    return res.status(400).json({ error: "Invalid email or password" });
+  }
 
+  const token = generateUserToken({ id: user.id, email: user.email });
+  return res.status(200).json({ message: "Login successfully!", token });
 };
 
 export { signupUser, loginUser };
