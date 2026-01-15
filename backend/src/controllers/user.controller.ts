@@ -1,10 +1,9 @@
 import { Request, Response } from "express";
-import { z } from "zod";
+import {formatZodError} from "../utils/formatZodError";
 // You can now use:
 import { createUserSchema, loginUserSchema} from "../validations";
 import { hashPassword } from "../utils/hash";
 import { getUserByEmail, createUser } from "../services/user.service";
-import jwt  from "jsonwebtoken";
 import { generateUserToken } from "../utils/token";
 
 const signupUser = async (req: Request, res: Response) => {
@@ -46,7 +45,7 @@ const signupUser = async (req: Request, res: Response) => {
 const loginUser = async (req: Request, res: Response) => {
     const validationResult = loginUserSchema.safeParse(req.body);
     if (validationResult.error) {
-      const formatedError = z.treeifyError(validationResult.error);
+      const formatedError = formatZodError(validationResult.error);
       return res.status(400).json({ error: formatedError });
     }
   const { email, password } = validationResult.data;

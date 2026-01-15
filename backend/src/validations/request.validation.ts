@@ -16,3 +16,8 @@ export const loginUserSchema = z.object({
 });
 
 export type LoginUserInput = z.infer<typeof loginUserSchema>;
+
+export const shortenUrlPostRequestSchema = z.object({
+    url: z.string().url(),
+    code: z.string().optional(),
+});
