@@ -33,6 +33,8 @@ Simple, secure URL Shortener backend built with Node.js, Express, TypeScript, Po
 | Validation       | Zod                                |
 | Containerization | Docker + Docker Compose (Postgres) |
 
+CORS is enabled for the local Vite origin (`http://localhost:5173`) so the frontend can call the API during development.
+
 ---
 
 ## Prerequisites
@@ -66,7 +68,7 @@ This uses `docker-compose.yml` to start a local PostgreSQL instance with:
 - Database: `url_shortner_db`
 - User: `postgres`
 - Password: `mysecretpassword`
-- Port: `5432`
+- Port: `5433` (host) → `5432` (container)
 
 ### 3. Configure environment variables
 
@@ -80,7 +82,7 @@ Example `.env` contents:
 
 ```env
 PORT=3000
-DATABASE_URL=postgres://postgres:mysecretpassword@localhost:5432/url_shortner_db
+DATABASE_URL=postgres://postgres:mysecretpassword@localhost:5433/url_shortner_db
 JWT_SECRET=super-secret-jwt-key
 ```
 

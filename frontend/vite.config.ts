@@ -10,4 +10,11 @@ export default defineConfig({
       },
     }),
   ],
+  server: {
+    proxy: {
+      '/user': 'http://localhost:3000',
+      '/shorten': 'http://localhost:3000',
+      '/codes': 'http://localhost:3000',
+    },
+  },
 })
